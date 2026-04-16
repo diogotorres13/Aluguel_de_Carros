@@ -3,6 +3,7 @@ package com.locadora.controller;
 import com.locadora.model.Cliente;
 import com.locadora.repository.ClienteRepository;
 import io.micronaut.http.annotation.*;
+import io.micronaut.http.MediaType;
 import io.micronaut.views.View;
 import io.micronaut.http.HttpResponse;
 import java.net.URI;
@@ -24,7 +25,7 @@ public class ClienteController {
         return new HashMap<>();
     }
 
-    @Post("/salvar")
+    @Post(value = "/salvar", consumes = MediaType.APPLICATION_FORM_URLENCODED)
     public HttpResponse<?> salvar(@Body Cliente cliente) {
         clienteRepository.save(cliente);
         return HttpResponse.seeOther(URI.create("/"));

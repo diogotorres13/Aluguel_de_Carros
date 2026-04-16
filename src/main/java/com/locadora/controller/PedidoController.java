@@ -5,6 +5,7 @@ import com.locadora.repository.CarroRepository;
 import com.locadora.repository.ClienteRepository;
 import com.locadora.repository.PedidoRepository;
 import io.micronaut.http.annotation.*;
+import io.micronaut.http.MediaType;
 import io.micronaut.views.View;
 import io.micronaut.http.HttpResponse;
 import java.net.URI;
@@ -35,7 +36,7 @@ public class PedidoController {
         return model;
     }
 
-    @Post("/salvar")
+    @Post(value = "/salvar", consumes = MediaType.APPLICATION_FORM_URLENCODED)
     public HttpResponse<?> salvar(@Body Pedido pedido) {
         pedidoRepository.save(pedido);
         return HttpResponse.seeOther(URI.create("/"));
