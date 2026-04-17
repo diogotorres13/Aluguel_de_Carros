@@ -4,13 +4,13 @@ import com.locadora.model.Carro;
 import com.locadora.repository.CarroRepository;
 import io.micronaut.http.annotation.*;
 import io.micronaut.http.MediaType;
-import io.micronaut.views.View;
 import io.micronaut.http.HttpResponse;
+import io.micronaut.views.View;
 import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 
-@Controller("/carros")
+@Controller("/carros") // Se essa linha estiver errada, dá 404
 public class CarroController {
 
     private final CarroRepository carroRepository;
@@ -20,7 +20,7 @@ public class CarroController {
     }
 
     @Get("/novo")
-    @View("carro-form")
+    @View("carro-form") // Verifique se o arquivo carro-form.html existe em views
     public Map<String, Object> novo() {
         return new HashMap<>();
     }
