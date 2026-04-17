@@ -1,4 +1,4 @@
-# 🏎️ Locadora - Sistema de Aluguer de Carros 👨‍💻
+# 🏎️ Locadora - Sistema de Aluguel de Carros 👨‍💻
 
 > [!NOTE]
 > Sistema web para gestão de aluguer de automóveis, permitindo o fluxo completo desde o pedido do cliente até à avaliação por agentes bancários.
