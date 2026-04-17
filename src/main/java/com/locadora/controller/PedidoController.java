@@ -9,6 +9,7 @@ import io.micronaut.http.MediaType;
 import io.micronaut.views.View;
 import io.micronaut.http.HttpResponse;
 import java.net.URI;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,6 +28,7 @@ public class PedidoController {
         this.carroRepository = carroRepository;
     }
 
+    // Tela de formulário para criar novo aluguel
     @Get("/novo")
     @View("pedido-form")
     public Map<String, Object> novo() {
@@ -36,9 +38,27 @@ public class PedidoController {
         return model;
     }
 
+    // Listagem de pedidos para consulta e avaliação (Requisito Sprint 03)
+    @Get("/listar")
+    @View("pedidos-lista")
+    public Map<String, Object> listar() {
+        return Collections.singletonMap("pedidos", pedidoRepository.findAll());
+    }
+
+    // Salva o pedido inicial com status "PENDENTE"
     @Post(value = "/salvar", consumes = MediaType.APPLICATION_FORM_URLENCODED)
     public HttpResponse<?> salvar(@Body Pedido pedido) {
         pedidoRepository.save(pedido);
-        return HttpResponse.seeOther(URI.create("/"));
+        return HttpResponse.seeOther(URI.create("/pedidos/listar"));
+    }
+
+    // Lógica para o Agente aprovar/avaliar o pedido (Requisito: Agentes avaliam pedidos)
+    @Post(value = "/avaliar/{id}", consumes = MediaType.APPLICATION_FORM_URLENCODED)
+    public HttpResponse<?> avaliar(@PathVariable Long id, String novoStatus) {
+        pedidoRepository.findById(id).ifPresent(p -> {
+            p.setStatus(novoStatus); // Atualiza para APROVADO ou CANCELADO
+            pedidoRepository.update(p);
+        });
+        return HttpResponse.seeOther(URI.create("/pedidos/listar"));
     }
 }

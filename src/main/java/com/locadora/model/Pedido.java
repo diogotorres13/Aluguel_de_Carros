@@ -1,23 +1,27 @@
 package com.locadora.model;
 
+import io.micronaut.core.annotation.Introspected;
 import javax.persistence.*;
 
 @Entity
+@Introspected
 public class Pedido {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    
-    // Relacionamentos simples para o protótipo da Sprint 4
+
     @ManyToOne
     private Cliente cliente;
-    
+
     @ManyToOne
     private Carro carro;
-    
+
     private String dataInicio;
     private String dataFim;
     private Double valorTotal;
+    
+    private String status = "PENDENTE"; 
+    private String parecerAgente;
 
     public Pedido() {}
 
@@ -34,4 +38,8 @@ public class Pedido {
     public void setDataFim(String dataFim) { this.dataFim = dataFim; }
     public Double getValorTotal() { return valorTotal; }
     public void setValorTotal(Double valorTotal) { this.valorTotal = valorTotal; }
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
+    public String getParecerAgente() { return parecerAgente; }
+    public void setParecerAgente(String parecerAgente) { this.parecerAgente = parecerAgente; }
 }
