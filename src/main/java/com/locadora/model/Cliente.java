@@ -4,7 +4,7 @@ import io.micronaut.core.annotation.Introspected;
 import javax.persistence.*;
 
 @Entity
-@Introspected
+@Introspected // Essencial para o Micronaut gerar as queries de banco
 public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -16,7 +16,7 @@ public class Cliente {
     private String endereco;
     private String profissao;
 
-    // Suporte aos 3 rendimentos exigidos no PDF
+    // Campos de rendimento exigidos (Máximo 3)
     private String empresa1;
     private Double rendimento1;
     
@@ -28,7 +28,7 @@ public class Cliente {
 
     public Cliente() {}
 
-    // Getters e Setters
+    // GETTERS E SETTERS (Devem existir para TODOS os campos acima)
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
     public String getNome() { return nome; }

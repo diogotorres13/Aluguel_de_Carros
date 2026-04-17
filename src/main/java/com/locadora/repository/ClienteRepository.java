@@ -6,5 +6,5 @@ import io.micronaut.data.repository.CrudRepository;
 
 @Repository
 public interface ClienteRepository extends CrudRepository<Cliente, Long> {
-    // Aqui você já ganha os métodos: save, findAll, findById, delete, etc.
+    // Ao estender CrudRepository, o Micronaut gera automaticamente o método save()
 }
